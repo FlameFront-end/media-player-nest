@@ -10,10 +10,9 @@ export class TrackService {
     private readonly repository: Repository<Track>,
   ) {}
 
-  async create(file: Express.Multer.File, title: string) {
+  async create(audio: Express.Multer.File, title: string) {
     return this.repository.save({
-      fileName: file.filename,
-      mimetype: file.mimetype,
+      audio: audio.filename,
       title,
     });
   }

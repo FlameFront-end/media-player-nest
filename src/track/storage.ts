@@ -12,7 +12,12 @@ const normalizeFileName = (req, file, callback) => {
   callback(null, `${generateId()}.${fileExtName}`);
 };
 
-export const fileStorage = diskStorage({
-  destination: './uploads',
+export const imageStorage = diskStorage({
+  destination: './uploads/image',
+  filename: normalizeFileName,
+});
+
+export const audioStorage = diskStorage({
+  destination: './uploads/audio',
   filename: normalizeFileName,
 });

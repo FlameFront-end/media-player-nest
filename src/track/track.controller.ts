@@ -1,17 +1,14 @@
 import {
   Body,
   Controller,
-  MaxFileSizeValidator,
-  ParseFilePipe,
   Post,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { CreateTrackDto } from './dto/create-track.dto';
 import { TrackService } from './track.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { fileStorage } from './storage';
+import { audioStorage } from './storage';
 
 @Controller('files')
 @ApiTags('files')
@@ -20,8 +17,8 @@ export class TrackController {
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('file', {
-      storage: fileStorage,
+    FileInterceptor('audio', {
+      storage: audioStorage,
     }),
   )
   @ApiConsumes('multipart/form-data')
@@ -29,7 +26,7 @@ export class TrackController {
     schema: {
       type: 'object',
       properties: {
-        file: {
+        audio: {
           type: 'string',
           format: 'binary',
         },
@@ -41,9 +38,9 @@ export class TrackController {
   })
   create(
     @UploadedFile()
-    file: Express.Multer.File,
+    audio: Express.Multer.File,
     @Body('title') title: string,
   ) {
-    return this.trackService.create(file, title);
+    return this.trackService.create(audio, title);
   }
 }

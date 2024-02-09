@@ -9,8 +9,5 @@ export class Track {
   title: string;
 
   @Column()
-  fileName: string;
-
-  @Column()
-  mimetype: string;
+  audio: string;
 }
