@@ -6,20 +6,20 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { TrackService } from './track.service';
+import { ImageService } from './image.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { audioStorage } from '../storage';
+import { imageStorage } from '../storage';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
-@Controller('track')
-@ApiTags('track')
-export class TrackController {
-  constructor(private readonly trackService: TrackService) {}
+@Controller('image')
+@ApiTags('image')
+export class ImageController {
+  constructor(private readonly imageService: ImageService) {}
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('audio', {
-      storage: audioStorage,
+    FileInterceptor('image', {
+      storage: imageStorage,
     }),
   )
   @ApiConsumes('multipart/form-data')
@@ -27,7 +27,7 @@ export class TrackController {
     schema: {
       type: 'object',
       properties: {
-        audio: {
+        image: {
           type: 'string',
           format: 'binary',
         },
@@ -39,14 +39,14 @@ export class TrackController {
   })
   create(
     @UploadedFile()
-    audio: Express.Multer.File,
+    image: Express.Multer.File,
     @Body('title') title: string,
   ) {
-    return this.trackService.create(audio, title);
+    return this.imageService.create(image, title);
   }
 
   @Get()
   async findAll() {
-    return this.trackService.findAll();
+    return this.imageService.findAll();
   }
 }

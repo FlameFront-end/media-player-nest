@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TrackModule } from './track/track.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Track } from './track/entities/track.entity';
+import { ImageModule } from './image/image.module';
+import { Image } from './image/entities/image.entity';
 
 @Module({
   imports: [
@@ -14,11 +16,12 @@ import { Track } from './track/entities/track.entity';
       username: 'jisqzvwo',
       password: 'aRv2abMzeFwgyS-IKQrsRuq9JedHEUVh',
       database: 'jisqzvwo',
-      entities: [Track],
+      entities: [Track, Image],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Track]),
+    TypeOrmModule.forFeature([Track, Image]),
     TrackModule,
+    ImageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
