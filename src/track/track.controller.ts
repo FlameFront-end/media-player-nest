@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -42,5 +43,10 @@ export class TrackController {
     @Body('title') title: string,
   ) {
     return this.trackService.create(audio, title);
+  }
+
+  @Get()
+  async findAll() {
+    return this.trackService.findAll();
   }
 }

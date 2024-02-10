@@ -16,4 +16,7 @@ export class TrackService {
       title,
     });
   }
+  async findAll() {
+    return this.repository.find();
+  }
 }
