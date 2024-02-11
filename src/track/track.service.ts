@@ -16,8 +16,8 @@ export class TrackService {
     title: string,
   ) {
     return this.repository.save({
-      audio: audio[0].originalname,
-      image: image[0].originalname,
+      audio: audio[0].filename,
+      image: image[0].filename,
       title,
     });
   }
