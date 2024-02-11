@@ -17,7 +17,7 @@ export const imageStorage = diskStorage({
   filename: normalizeFileName,
 });
 
-export const audioStorage = diskStorage({
-  destination: './uploads/audio',
+export const trackStorage = diskStorage({
+  destination: './uploads/track',
   filename: normalizeFileName,
 });

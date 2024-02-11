@@ -3,13 +3,13 @@ import {
   Controller,
   Get,
   Post,
-  UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { TrackService } from './track.service';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { audioStorage } from '../storage';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { trackStorage } from '../storage';
 
 @Controller('track')
 @ApiTags('track')
@@ -18,9 +18,15 @@ export class TrackController {
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('audio', {
-      storage: audioStorage,
-    }),
+    FileFieldsInterceptor(
+      [
+        { name: 'audio', maxCount: 1 },
+        { name: 'image', maxCount: 1 },
+      ],
+      {
+        storage: trackStorage,
+      },
+    ),
   )
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -31,6 +37,10 @@ export class TrackController {
           type: 'string',
           format: 'binary',
         },
+        image: {
+          type: 'string',
+          format: 'binary',
+        },
         title: {
           type: 'string',
         },
@@ -38,11 +48,12 @@ export class TrackController {
     },
   })
   create(
-    @UploadedFile()
-    audio: Express.Multer.File,
+    @UploadedFiles()
+    files: { audio: Express.Multer.File[]; image: Express.Multer.File[] },
     @Body('title') title: string,
   ) {
-    return this.trackService.create(audio, title);
+    console.log('files', files);
+    return this.trackService.create(files.audio, files.image, title);
   }
 
   @Get()

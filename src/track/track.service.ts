@@ -10,12 +10,18 @@ export class TrackService {
     private readonly repository: Repository<Track>,
   ) {}
 
-  async create(audio: Express.Multer.File, title: string) {
+  async create(
+    audio: Express.Multer.File[],
+    image: Express.Multer.File[],
+    title: string,
+  ) {
     return this.repository.save({
-      audio: audio.filename,
+      audio: audio[0].originalname,
+      image: image[0].originalname,
       title,
     });
   }
+
   async findAll() {
     return this.repository.find();
   }

@@ -10,4 +10,7 @@ export class Track {
 
   @Column()
   audio: string;
+
+  @Column()
+  image: string;
 }
