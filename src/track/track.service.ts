@@ -25,4 +25,8 @@ export class TrackService {
   async findAll() {
     return this.repository.find();
   }
+
+  async delete(id: string) {
+    return this.repository.delete(id);
+  }
 }

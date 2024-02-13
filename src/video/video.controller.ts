@@ -5,6 +5,8 @@ import {
   Body,
   UseInterceptors,
   UploadedFile,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
@@ -48,5 +50,10 @@ export class VideoController {
   @Get()
   async findAll() {
     return this.videoService.findAll();
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.videoService.delete(id);
   }
 }

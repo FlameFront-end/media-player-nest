@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UploadedFiles,
   UseInterceptors,
@@ -59,5 +61,10 @@ export class TrackController {
   @Get()
   async findAll() {
     return this.trackService.findAll();
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.trackService.delete(id);
   }
 }

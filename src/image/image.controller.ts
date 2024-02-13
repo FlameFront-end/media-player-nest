@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -48,5 +50,10 @@ export class ImageController {
   @Get()
   async findAll() {
     return this.imageService.findAll();
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.imageService.delete(id);
   }
 }

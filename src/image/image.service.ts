@@ -20,4 +20,8 @@ export class ImageService {
   async findAll() {
     return this.repository.find();
   }
+
+  async delete(id: string) {
+    return this.repository.delete(id);
+  }
 }
