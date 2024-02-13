@@ -17,6 +17,11 @@ export const imageStorage = diskStorage({
   filename: normalizeFileName,
 });
 
+export const videoStorage = diskStorage({
+  destination: './uploads/video',
+  filename: normalizeFileName,
+});
+
 export const trackStorage = diskStorage({
   destination: './uploads/track',
   filename: normalizeFileName,

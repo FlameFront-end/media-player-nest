@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Track } from './track/entities/track.entity';
 import { ImageModule } from './image/image.module';
 import { Image } from './image/entities/image.entity';
+import { VideoModule } from './video/video.module';
+import { Video } from './video/entities/video.entity';
 
 @Module({
   imports: [
@@ -16,12 +18,13 @@ import { Image } from './image/entities/image.entity';
       username: 'jisqzvwo',
       password: 'aRv2abMzeFwgyS-IKQrsRuq9JedHEUVh',
       database: 'jisqzvwo',
-      entities: [Track, Image],
+      entities: [Track, Image, Video],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Track, Image]),
+    TypeOrmModule.forFeature([Track, Image, Video]),
     TrackModule,
     ImageModule,
+    VideoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
